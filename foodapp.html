@@ -1,0 +1,128 @@
+
+
+
+<html>
+
+<link rel = "stylesheet"
+   type = "text/css"
+   href = "myStyle.css" />
+
+
+	<head>
+		<title> Mattias's Food App </title>
+		<link rel="icon" href="favicon.jpg" type="image/jpg" sizes="16x16">
+	
+	</head>
+	
+	<div class="firstbox">
+		<h1 class="center">Food Checker</h1>
+
+	</div>
+
+<body>
+	
+	<p></p>
+	
+	<form id="FoodForm">
+	
+		Insert Food Name here: 
+		<input type="text" id="foodname" name="Food">
+	
+		<p></p>
+	
+		<button type = "button" onclick = "runall(); return false;">Run</button>
+	
+	</form>
+
+	<hr></hr>
+	
+	<p id="DisplayURL">Food Name</p>
+	<p></p>
+	
+		<div class = "secondbox">
+	
+			
+			<p></p>
+			Category: <p Id="myData1"></p>
+			Label: <p id = "myData2"></p>
+			Image: <p id="x"></p>
+			
+			
+	
+		</div>	
+	
+</body>
+
+<script>
+
+			function runall() {
+					resetdata();
+					callAPI();
+					}
+		
+function resetdata(){
+document.getElementById("myData1").innerHTML = "";
+document.getElementById("myData2").innerHTML = "";
+document.getElementById("x").innerHTML = "";
+}
+
+			
+function callAPI(){
+				
+				//this creates the URL for FetchAPI to use
+				var url = new URL("https://edamam-food-and-grocery-database.p.rapidapi.com/parser?");
+
+				var params = {ingr:foodname.value} ;
+
+				url.search = new URLSearchParams(params).toString() ;
+				
+				document.getElementById("DisplayURL").innerHTML = url;
+				document.getElementById("DisplayURL").innerHTML = foodname.value.toUpperCase();
+				
+				//this calls the FetchAPI
+			fetch(url, {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "edamam-food-and-grocery-database.p.rapidapi.com",
+		"x-rapidapi-key": "6cc200efadmsh4071dc10ae5e35fp1c79d7jsn4bbe7fe630a3"
+	}
+})
+			.then(function (response) {
+                return response.json();
+            })
+			
+			.then(function (response) {
+                console.log(response);
+			
+			var foodA = Object.values(response.hints[0].food.category);	
+			document.getElementById("myData1").innerHTML = foodA.join("")
+			
+			var labelA = Object.values(response.hints[0].food.label);	
+			document.getElementById("myData2").innerHTML = labelA.join("")
+			
+			var ImageA = Object.values(response.hints[0].food.image);	
+			Foodpicture = ImageA.join("")
+			
+			var img = document.createElement("img");
+			img.src = Foodpicture;
+		
+			var src = document.getElementById("x");
+			src.appendChild(img);
+			
+			})
+			
+			
+			
+			.catch(err => {
+				console.log(err);
+			}) 
+			
+
+			}
+
+			
+	</script>
+	
+
+
+</html>

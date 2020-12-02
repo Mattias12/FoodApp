@@ -1,0 +1,35 @@
+
+/* myStyle.css */
+body {
+ background-color: light blue;
+ color: black;
+}
+h1 {
+ color: black;
+ text-align: center;
+ font: italic 200%}
+ 
+ 
+.firstbox{
+width: 400px;
+height: 40px;
+background: #FF0000
+}
+
+.center{
+display: flex;
+justify-content: center;
+align-items: center
+}
+
+.secondbox{
+width: 1000px;
+height: 1000px;
+border: 2px solid grey;
+background: white;
+}
+
+.uppercase{
+text-transform:uppercase
+}
+}
