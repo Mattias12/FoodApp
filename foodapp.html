@@ -83,8 +83,8 @@ function callAPI(){
 			fetch(url, {
 	"method": "GET",
 	"headers": {
-		"x-rapidapi-host": Api_host,
-		"x-rapidapi-key": API_key
+		"x-rapidapi-host": ${{ secrets.API_HOST }},
+		"x-rapidapi-key": ${{ secrets.API_KEY }}
 	}
 })
 			.then(function (response) {
